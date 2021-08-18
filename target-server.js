@@ -85,7 +85,6 @@ app.get("/abtest", function (req, res) {
         indexId: 0
       }]
     }
-//   };
   const request = Object.assign({payload}, {targetCookie}, {visitorCookie}, {targetLocationHintCookie});
  
   console.log("Request", request);
