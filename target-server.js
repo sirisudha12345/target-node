@@ -3,9 +3,14 @@ const cookieParser = require("cookie-parser");
 const TargetNodeClient = require("@adobe/target-node-client");
 //const TargetNodeClient = require("@adobe/target-nodejs-sdk");
 const CONFIG = {
-  client: "acmeclient",
-  organizationId: "1234567890@AdobeOrg"
+  // client: "acmeclient",
+  // organizationId: "1234567890@AdobeOrg"
+  // client: "optisightsps",
+  // organizationId: "636435DD5CF8FB400A495FCD@AdobeOrg"
+  client: "sephora",
+  organizationId: "D46B1DDB611D3FC50A495F8A@AdobeOrg"
 };
+
 const TEMPLATE = `
 <!doctype html>
 <html>
@@ -13,6 +18,7 @@ const TEMPLATE = `
   <meta charset="UTF-8">
   <title>Target Node Client NodeJS SDK Sample</title>
   <script src="VisitorAPI.js"></script>
+  <script src="JQuery.js"></script>
   <script>
     Visitor.getInstance("{organizationId}", {serverState: {visitorState}});
   </script>
@@ -51,11 +57,12 @@ function sendSuccessResponse(res, response) {
     "Content-Type": "text/html",
     "Expires": new Date().toUTCString()
   });
+  console.log("Reponse", response);
  
   const result = TEMPLATE
   .replace("{organizationId}", CONFIG.organizationId)
   .replace("{visitorState}", JSON.stringify(response.visitorState))
-  .replace("{content}", response.content);
+  .replace("{content}", response.content.mboxResponses[0].content);
  
   saveCookie(res, response.targetCookie);
   saveCookie(res, response.targetLocationHintCookie);
@@ -87,7 +94,7 @@ app.get("/abtest", function (req, res) {
     }
   const request = Object.assign({payload}, {targetCookie}, {visitorCookie}, {targetLocationHintCookie});
  
-  console.log("Request", request);
+  
  
   client.getOffers(request)
   .then(response => {
