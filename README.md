@@ -1,5 +1,5 @@
 # target-node
-Adobe Target Node JS
+Adobe Target Server Side-Node JS
 
 Please run below steps to excute code locally:
 
@@ -9,4 +9,4 @@ npm run www
 
 localhost:3000/abtest
 
-Adobe Experience Cloud Debugger for Debugging add through Chrome extension
+Adobe Experience Cloud Debugger- for Debugging add through Chrome extension
