@@ -10,7 +10,7 @@ const TEMPLATE = fs.readFileSync(`${__dirname}/index.tpl`).toString();
 
 // Initialize the Express app
 const app = express();
-const PORT = process.env.PORT;
+const PORT = 3000;
 
 // Enable TargetClient logging via the console logger
 const targetOptions = Object.assign({ logger: console }, CONFIG);
